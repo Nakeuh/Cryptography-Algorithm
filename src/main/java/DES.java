@@ -1,5 +1,5 @@
 import java.util.ArrayList;
-import java.util.BitSet;
+
 import java.util.List;
 
 /**
@@ -7,14 +7,14 @@ import java.util.List;
  */
 public class DES implements Constantes{
 
-    public BitSet encrypt(BitSet message, BitSet key){
-        BitSet retour = new BitSet();
+    public List<Boolean> encrypt(List<Boolean> message, List<Boolean> key){
+        List<Boolean> retour = new ArrayList<Boolean>();
 
         // Première permutation sur le message avec IP
         permute(message, Constantes.IP);
 
         // Récupération des clés d'étapes
-        List<BitSet> keys = keyGeneration(key);
+        List<List<Boolean>> keys = keyGeneration(key);
 
         // Première étape
 
@@ -27,40 +27,41 @@ public class DES implements Constantes{
         return retour;
     }
 
-    public BitSet decrypt(BitSet crypted, BitSet key){
+    public List<Boolean> decrypt(List<Boolean> crypted, List<Boolean> key){
         return null;
     }
 
-    public List<BitSet> keyGeneration(BitSet key){
+    public List<List<Boolean>> keyGeneration(List<Boolean> key){
 
-        List<BitSet> retour = new ArrayList<BitSet>();
+        List<List<Boolean>> retour = new ArrayList<List<Boolean>>();
 
         // Initialisation : Permutation avec P10
-        BitSet keyPermuteP10 = permute(key, Constantes.P10);
+        List<Boolean> keyPermuteP10 = permute(key, Constantes.P10);
 
         // PREMIERE ETAPE
         // Split
-        BitSet[] halfs = Util.split(keyPermuteP10);
+        List<List<Boolean>> halfs = Util.split(keyPermuteP10);
 
         // On shift de 1 à gauche
-        halfs[0] = Util.shiftBit(halfs[0], 1, true);
-        halfs[1] = Util.shiftBit(halfs[1], 1, true);
+        halfs.set(0, Util.shiftBit(halfs.get(0), 1, true));
+        halfs.set(1, Util.shiftBit(halfs.get(1), 1, true));
 
         // On concatène
-        BitSet concatenation = Util.concat(halfs[0], halfs[1]);
+        List<Boolean> concatenation = Util.concat(halfs.get(0), halfs.get(1));
 
         // On permute avec P8
-        BitSet keyPermuteP8 = permute(concatenation, Constantes.P8);
+        List<Boolean> keyPermuteP8 = permute(concatenation, Constantes.P8);
 
         retour.add(keyPermuteP8);
 
         // DEUXIEME ETAPE
-        halfs[0] = Util.shiftBit(halfs[0], 2, true);
-        halfs[1] = Util.shiftBit(halfs[1], 2, true);
+        // On shift de 1 à gauche
+        halfs.set(0, Util.shiftBit(halfs.get(0), 1, true));
+        halfs.set(1, Util.shiftBit(halfs.get(1), 1, true));
 
         // On concatène
-        concatenation = Util.concat(halfs[0], halfs[1]);
-        
+        concatenation = Util.concat(halfs.get(0), halfs.get(1));
+
         // On permute avec P8
         keyPermuteP8 = permute(concatenation, Constantes.P8);
 
@@ -69,24 +70,26 @@ public class DES implements Constantes{
         return retour;
     }
 
-    public BitSet substitute(){
+    public List<Boolean> substitute(){
         return null;
     }
 
-    public boolean[] permute(boolean[] bits, int[] permutations){
-        boolean[] resBitSet = new boolean[bits.length];
 
-        for(int i=0; i <bits.length; i++){
-            resBitSet[i] = bits[permutations[i]];
+    public List<Boolean> permute(List<Boolean> bits, int[] permutations){
+        List<Boolean> retour = new ArrayList<Boolean>();
+
+        for(int i=0; i < bits.size() ; i++){
+            retour.add(bits.get(permutations[i]));
         }
-        return resBitSet;
+
+        return retour;
     }
 
-    public BitSet sbox(){
+    public List<Boolean> sbox(){
         return null;
     }
 
-    public BitSet[] fk(BitSet data, BitSet key) {
+    public List<Boolean>[] fk(List<Boolean> data, List<Boolean> key) {
         return null;
     }
 }
