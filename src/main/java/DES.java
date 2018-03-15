@@ -11,12 +11,18 @@ public class DES implements Constantes{
         BitSet retour = new BitSet();
 
         // Première permutation sur le message avec IP
+        permute(message, Constantes.IP);
 
         // Récupération des clés d'étapes
+        List<BitSet> keys = keyGeneration(key);
 
         // Première étape
 
+
         // Deuxième étape
+
+        // Permutation avec IP-1
+        permute(message, Constantes.INVERT_IP);
 
         return retour;
     }
@@ -72,6 +78,10 @@ public class DES implements Constantes{
     }
 
     public BitSet sbox(){
+        return null;
+    }
+
+    public BitSet[] fk(BitSet data, BitSet key) {
         return null;
     }
 }
