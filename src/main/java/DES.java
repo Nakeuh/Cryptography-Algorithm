@@ -100,8 +100,8 @@ public class DES implements Constantes{
     private List<Boolean> permute(List<Boolean> bits, int[] permutations){
         List<Boolean> retour = new ArrayList<Boolean>();
 
-        for(int i=0; i < permutations.length ; i++){
-            retour.add(bits.get(permutations[i]));
+        for(int i = 0 ; i < permutations.length ; i++){
+            retour.add(bits.get(permutations[i] - 1));
         }
 
         return retour;

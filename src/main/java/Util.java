@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -24,14 +25,12 @@ public class Util {
 
     public static List<Boolean> concat(List<Boolean> data1, List<Boolean> data2) {
 
-        List<Boolean> retour = new ArrayList<Boolean>();
+        Boolean[] array = new Boolean[data1.size()*2];
+        List<Boolean> retour = Arrays.asList(array);
 
-        for(int i = 0 ; i < data1.size() ; i++) {
+        for(int i = 0 ; i < data1.size(); i++) {
             retour.set(i, data1.get(i));
-        }
-
-        for(int i = data1.size() ; i < data1.size() ; i++) {
-            retour.set(i + data1.size(), data2.get(i + data1.size()));
+            retour.set(i + data1.size(), data2.get(i));
         }
 
         return retour;
@@ -41,7 +40,7 @@ public class Util {
 
         List<List<Boolean>> retour = new ArrayList<List<Boolean>>();
 
-        List<Boolean> half1 = data.subList(0, (data.size()-1)/2);
+        List<Boolean> half1 = data.subList(0, (data.size())/2);
         List<Boolean> half2 = data.subList((data.size()-1)/2, data.size()-1);
 
         retour.add(half1);
@@ -116,5 +115,40 @@ public class Util {
         retour.add(data.get(0));
 
         return retour;
+    }
+
+    public static String charToBinaryString(char myChar){
+        String binaryStringChar = Integer.toBinaryString((int)myChar);
+        int nbrZeroToAdd = 8 - binaryStringChar.length();
+        for(int i=0; i < nbrZeroToAdd; i++){
+            binaryStringChar = binaryStringChar + "0";
+        }
+        return binaryStringChar;
+    }
+
+    public static List<Boolean> binaryStringToBooleanList(String myString){
+        String[] temp = myString.split("");
+        List<Boolean> booleanList = new ArrayList<Boolean>(myString.length());
+        for (int i=0; i<myString.length(); i++){
+
+            if( Integer.parseInt(temp[i]) == 1){
+                booleanList.add(true);
+            }else{
+                booleanList.add(false);
+            }
+        }
+        return booleanList;
+    }
+
+    public static void printBooleanListFormat(List<Boolean> booleanList){
+        System.out.print("[");
+        for ( Boolean bool : booleanList){
+            if(bool){
+                System.out.print("1,");
+            }else{
+                System.out.print("0,");
+            }
+        }
+        System.out.print("]");
     }
 }
