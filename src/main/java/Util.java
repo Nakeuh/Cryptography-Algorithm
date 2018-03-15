@@ -28,7 +28,10 @@ public class Util {
 
         for(int i = 0 ; i < data1.size() ; i++) {
             retour.set(i, data1.get(i));
-            retour.set(i + 5, data2.get(i + 5));
+        }
+
+        for(int i = data1.size() ; i < data1.size() ; i++) {
+            retour.set(i + data1.size(), data2.get(i + data1.size()));
         }
 
         return retour;
@@ -58,5 +61,60 @@ public class Util {
             }
         }
         return string.toString();
+    }
+
+    public static List<Boolean> or(List<Boolean> data, List<Boolean> key) {
+
+        List<Boolean> retour = new ArrayList<Boolean>();
+
+        for(int i = 0 ; i < data.size() ; i++){
+            retour.add(data.get(i) != key.get(i));
+        }
+
+        return retour;
+    }
+
+    public static int booleanToInt(Boolean bool1, Boolean bool2) {
+
+        int result = 0;
+
+        if(bool1){
+            result += 2;
+        }
+
+        if(bool2){
+            result += 1;
+        }
+
+        return result;
+    }
+
+    public static List<Boolean> intToBoolean(int data) {
+
+        List<Boolean> retour = new ArrayList<Boolean>();
+
+        if(data >= 2) {
+            retour.add(true);
+        } else {
+            retour.add(false);
+        }
+
+        if(data % 2 != 0) {
+            retour.add(true);
+        } else {
+            retour.add(false);
+        }
+
+        return retour;
+    }
+
+    public static List<List<Boolean>> switchList(List<List<Boolean>> data) {
+
+        List<List<Boolean>> retour = new ArrayList<List<Boolean>>();
+
+        retour.add(data.get(1));
+        retour.add(data.get(0));
+
+        return retour;
     }
 }
