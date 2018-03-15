@@ -73,8 +73,13 @@ public class DES implements Constantes{
         return null;
     }
 
-    public BitSet permute(BitSet bits, int[] permutations){
-        return null;
+    public boolean[] permute(boolean[] bits, int[] permutations){
+        boolean[] resBitSet = new boolean[bits.length];
+
+        for(int i=0; i <bits.length; i++){
+            resBitSet[i] = bits[permutations[i]];
+        }
+        return resBitSet;
     }
 
     public BitSet sbox(){
