@@ -8,7 +8,17 @@ import java.util.List;
 public class DES implements Constantes{
 
     public BitSet encrypt(BitSet message, BitSet key){
-        return null;
+        BitSet retour = new BitSet();
+
+        // Première permutation sur le message avec IP
+
+        // Récupération des clés d'étapes
+
+        // Première étape
+
+        // Deuxième étape
+
+        return retour;
     }
 
     public BitSet decrypt(BitSet crypted, BitSet key){
