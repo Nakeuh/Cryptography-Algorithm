@@ -13,12 +13,15 @@ public class Main {
         // Setup
         DES des = new DES();
         String message = "Un super message";
-        String key = "1000000000";
+        String key = "1000110000";
         List<Boolean> keyBoolean = Util.binaryStringToBooleanList(key);
         List<List<Boolean>> booleanListMessageChiffe = new ArrayList<List<Boolean>>();
         String messageToSend = "";
 
         char[] charArrayMessage = message.toCharArray();
+
+        System.out.println("Message à envoyer : " + message);
+        System.out.println("Clé : " + key);
 
         // On encrypte les charactère one by one
         for (char currentChar : charArrayMessage){
@@ -71,11 +74,4 @@ public class Main {
         }
         System.out.println("Message decrypté : " + messageDecrypted);
     }
-
-    public static void testDES(String message, String key){
-    }
-
-    public static void testRSA(){
-    }
-
 }
