@@ -118,12 +118,18 @@ public class Util {
     }
 
     public static String charToBinaryString(char myChar){
+
+        String zeroString = "";
+
         String binaryStringChar = Integer.toBinaryString((int)myChar);
+
         int nbrZeroToAdd = 8 - binaryStringChar.length();
-        for(int i=0; i < nbrZeroToAdd; i++){
-            binaryStringChar = binaryStringChar + "0";
+
+        for (int i=0; i < nbrZeroToAdd; i++){
+            zeroString = zeroString + '0';
         }
-        return binaryStringChar;
+
+        return zeroString + binaryStringChar;
     }
 
     public static List<Boolean> binaryStringToBooleanList(String myString){
@@ -150,5 +156,24 @@ public class Util {
             }
         }
         System.out.print("]");
+    }
+
+    public static String booleanListToBinaryString(List<Boolean> booleanList){
+        String binaryString = "";
+
+        for (Boolean bool : booleanList){
+            if(bool){
+                binaryString = binaryString + "1";
+            }else{
+                binaryString = binaryString + "0";
+            }
+        }
+        return binaryString;
+    }
+
+    public static String binaryStringToChar(String binaryString){
+        int charCode = Integer.parseInt(binaryString, 2);
+        String res = new Character((char)charCode).toString();
+        return res;
     }
 }
