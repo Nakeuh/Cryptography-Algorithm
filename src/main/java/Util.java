@@ -148,14 +148,23 @@ public class Util {
 
     public static void printBooleanListFormat(List<Boolean> booleanList){
         System.out.print("[");
-        for ( Boolean bool : booleanList){
-            if(bool){
-                System.out.print("1,");
+
+        for (int i=0; i < booleanList.size(); i++){
+            if(booleanList.get(i)){
+                if(i == booleanList.size()-1){
+                    System.out.print("1");
+                }else{
+                    System.out.print("1,");
+                }
             }else{
-                System.out.print("0,");
+                if(i == booleanList.size()-1){
+                    System.out.print("0");
+                }else{
+                    System.out.print("0,");
+                }
             }
         }
-        System.out.print("]");
+        System.out.println("]");
     }
 
     public static String booleanListToBinaryString(List<Boolean> booleanList){
