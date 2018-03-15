@@ -40,8 +40,8 @@ public class Util {
 
         List<List<Boolean>> retour = new ArrayList<List<Boolean>>();
 
-        List<Boolean> half1 = data.subList(0, (data.size())/2);
-        List<Boolean> half2 = data.subList((data.size()-1)/2, data.size()-1);
+        List<Boolean> half1 = data.subList(0, data.size()/2);
+        List<Boolean> half2 = data.subList(data.size()/2, data.size());
 
         retour.add(half1);
         retour.add(half2);
