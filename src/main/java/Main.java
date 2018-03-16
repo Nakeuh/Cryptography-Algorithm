@@ -1,4 +1,5 @@
 
+import java.security.KeyPair;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,7 +10,7 @@ import java.util.List;
 public class Main {
 
     public static void main(String [] args){
-        testDES();
+        testRSA();
     }
 
     public static void testDES(){
@@ -81,7 +82,15 @@ public class Main {
     public static void testRSA(){
         RSA rsa = new RSA();
         String message = "Un super message";
-        String publicKey;
-        String privateKey;
+
+        KeyPair keys = rsa.generateKey(2048);
+
+        byte[] crypted = rsa.encrypt(message,keys.getPublic());
+
+        String output = rsa.decrypt(crypted,keys.getPrivate());
+
+        System.out.println("Inpput message : "+message);
+        System.out.println("Output message : "+output);
+
     }
 }
