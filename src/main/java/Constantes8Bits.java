@@ -1,7 +1,7 @@
 /**
  * Created by victor on 3/15/18.
  */
-public interface Constantes {
+public interface Constantes8Bits {
 
     public static int[] P10 = {3,5,2,7,4,10,1,9,8,6};
     public static int[] P8 = {6,3,7,4,8,5,10,9};

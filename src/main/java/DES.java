@@ -5,14 +5,14 @@ import java.util.List;
 /**
  * Created by victor on 3/15/18.
  */
-public class DES implements Constantes{
+public class DES implements Constantes8Bits {
 
     public List<Boolean> encrypt(List<Boolean> message, List<Boolean> key){
 
         List<Boolean> retour;
 
         // Première permutation sur le message avec IP
-        List<Boolean> initialPermutResult = permute(message, Constantes.IP);
+        List<Boolean> initialPermutResult = permute(message, Constantes8Bits.IP);
 
         // Récupération des clés d'étapes
         List<List<Boolean>> keys = keyGeneration(key);
@@ -28,7 +28,7 @@ public class DES implements Constantes{
         concatFkResultatSwitched = Util.concat(fkResult2.get(0), fkResult2.get(1));
 
         // Permutation avec IP-1
-        retour = permute(concatFkResultatSwitched, Constantes.INVERT_IP);
+        retour = permute(concatFkResultatSwitched, Constantes8Bits.INVERT_IP);
 
         return retour;
     }
@@ -37,7 +37,7 @@ public class DES implements Constantes{
         List<Boolean> retour;
 
         // Première permutation sur le message avec IP
-        List<Boolean> initialPermutResult = permute(crypted, Constantes.IP);
+        List<Boolean> initialPermutResult = permute(crypted, Constantes8Bits.IP);
 
         // Récupération des clés d'étapes
         List<List<Boolean>> keys = keyGeneration(key);
@@ -53,7 +53,7 @@ public class DES implements Constantes{
         concatFkResultatSwitched = Util.concat(fkResult2.get(0), fkResult2.get(1));
 
         // Permutation avec IP-1
-        retour = permute(concatFkResultatSwitched, Constantes.INVERT_IP);
+        retour = permute(concatFkResultatSwitched, Constantes8Bits.INVERT_IP);
 
         return retour;
     }
@@ -63,7 +63,7 @@ public class DES implements Constantes{
         List<List<Boolean>> retour = new ArrayList<List<Boolean>>();
 
         // Initialisation : Permutation avec P10
-        List<Boolean> keyPermuteP10 = permute(key, Constantes.P10);
+        List<Boolean> keyPermuteP10 = permute(key, Constantes8Bits.P10);
 
         // PREMIERE ETAPE
         // Split
@@ -77,7 +77,7 @@ public class DES implements Constantes{
         List<Boolean> concatenation = Util.concat(halfs.get(0), halfs.get(1));
 
         // On permute avec P8
-        List<Boolean> keyPermuteP8 = permute(concatenation, Constantes.P8);
+        List<Boolean> keyPermuteP8 = permute(concatenation, Constantes8Bits.P8);
 
         retour.add(keyPermuteP8);
 
@@ -90,7 +90,7 @@ public class DES implements Constantes{
         concatenation = Util.concat(halfs.get(0), halfs.get(1));
 
         // On permute avec P8
-        keyPermuteP8 = permute(concatenation, Constantes.P8);
+        keyPermuteP8 = permute(concatenation, Constantes8Bits.P8);
 
         retour.add(keyPermuteP8);
 
@@ -115,7 +115,7 @@ public class DES implements Constantes{
         List<List<Boolean>> arraySplit = Util.split(data);
 
         // On permute la deuxième liste (liste de droite) avec EP
-        List<Boolean> extendedPermuted = permute(arraySplit.get(1), Constantes.E_P);
+        List<Boolean> extendedPermuted = permute(arraySplit.get(1), Constantes8Bits.E_P);
 
         // Ou Logique entre le résultat de la permutation et la clé
         List<Boolean> orResult = Util.or(extendedPermuted, key);
@@ -124,8 +124,8 @@ public class DES implements Constantes{
         List<List<Boolean>> orResultSplit = Util.split(orResult);
 
         // On fait appel deux fois à sbox avec nos deux listes)
-        List<Boolean> sboxResult1 = sbox(orResultSplit.get(0), Constantes.S0);
-        List<Boolean> sboxResult2 = sbox(orResultSplit.get(0), Constantes.S1);
+        List<Boolean> sboxResult1 = sbox(orResultSplit.get(0), Constantes8Bits.S0);
+        List<Boolean> sboxResult2 = sbox(orResultSplit.get(0), Constantes8Bits.S1);
 
         // On concatène les résultats
         List<Boolean> sboxConcat = Util.concat(sboxResult1, sboxResult2);

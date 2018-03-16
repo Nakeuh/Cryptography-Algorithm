@@ -1,10 +1,9 @@
-import java.util.BitSet;
 import java.util.List;
 
 /**
  * Created by victor on 3/15/18.
  */
-public class RSA implements Constantes{
+public class RSA implements Constantes8Bits {
 
 
     public List<Boolean> generateKey(List<Boolean> message, List<Boolean> publicKey){
