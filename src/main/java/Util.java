@@ -7,6 +7,51 @@ import java.util.List;
  */
 public class Util {
 
+
+    // 8bits
+
+    public static String convertKeyToBinaryString(String asciiCharKey){
+
+        char[] charArray = asciiCharKey.toCharArray();
+
+        String asciiBinaryStringKey = Util.charToBinaryString(charArray[0]);
+        String res = "00" + asciiBinaryStringKey;
+
+        return res;
+    }
+
+    // 64bits
+
+    // Permet de convertir une chaine de charactères vers sa version au format binaire
+    public static String convertAsciiStringToBinaryString(String asciiString){
+        char[] charArray = asciiString.toCharArray();
+        String res ="";
+
+        for (char currentChar : charArray){
+            res = res + charToBinaryString(currentChar);
+        }
+        return res;
+    }
+
+    // Common
+
+    // Permet de convertir un charactère ASCII sous la forme d'une chaîne de charactère binaire (de 8 bit)
+    public static String charToBinaryString(char myChar){
+
+        String zeroString = "";
+
+        String binaryStringChar = Integer.toBinaryString((int)myChar);
+
+        int nbrZeroToAdd = 8 - binaryStringChar.length();
+
+        for (int i=0; i < nbrZeroToAdd; i++){
+            zeroString = zeroString + '0';
+        }
+
+        return zeroString + binaryStringChar;
+    }
+
+    // Non trié
     public static List<Boolean> shiftBit(List<Boolean> data, int shift, boolean isLeft){
 
         if(!isLeft){
@@ -117,20 +162,7 @@ public class Util {
         return retour;
     }
 
-    public static String charToBinaryString(char myChar){
 
-        String zeroString = "";
-
-        String binaryStringChar = Integer.toBinaryString((int)myChar);
-
-        int nbrZeroToAdd = 8 - binaryStringChar.length();
-
-        for (int i=0; i < nbrZeroToAdd; i++){
-            zeroString = zeroString + '0';
-        }
-
-        return zeroString + binaryStringChar;
-    }
 
     public static List<Boolean> binaryStringToBooleanList(String myString){
         String[] temp = myString.split("");
@@ -185,4 +217,6 @@ public class Util {
         String res = new Character((char)charCode).toString();
         return res;
     }
+
+
 }
