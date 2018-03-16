@@ -9,7 +9,10 @@ import java.util.List;
 public class Main {
 
     public static void main(String [] args){
+        testDES();
+    }
 
+    public static void testDES(){
         // Setup
         DES des = new DES();
         String message = "Un super message";
@@ -73,5 +76,12 @@ public class Main {
             messageDecrypted = messageDecrypted + charToAddOnMessage;
         }
         System.out.println("Message decrypté : " + messageDecrypted);
+    }
+
+    public static void testRSA(){
+        RSA rsa = new RSA();
+        String message = "Un super message";
+        String publicKey;
+        String privateKey;
     }
 }
