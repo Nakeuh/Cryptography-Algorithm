@@ -1,7 +1,9 @@
 
+import Crypto.DES64;
+import Crypto.DESSimple;
+import Crypto.RSA;
+
 import java.security.KeyPair;
-import java.util.ArrayList;
-import java.util.List;
 
 
 /**
@@ -10,87 +12,55 @@ import java.util.List;
 public class Main {
 
     public static void main(String [] args){
+        testDES();
         testRSA();
     }
 
-    public static void testDES(){
-        // Setup
-        DES des = new DES();
-        String message = "Un super message";
+    private static void testDES(){
+
+        // Message que l'on souhaite chiffrer
+        String message = "Un super message !";
+
+        // Setup DES Simple
+        DESSimple desSimple = new DESSimple();
         String key = "1000110000";
-        List<Boolean> keyBoolean = Util.binaryStringToBooleanList(key);
-        List<List<Boolean>> booleanListMessageChiffe = new ArrayList<List<Boolean>>();
-        String messageToSend = "";
 
-        char[] charArrayMessage = message.toCharArray();
+        // Setup 64
+        DES64 des64 = new DES64();
+        String key64 = "0011100110000101010000011101011001001110110001011100000001100010";
 
-        System.out.println("Message à envoyer : " + message);
+        System.out.println("Message de départ : " + message);
         System.out.println("Clé : " + key);
 
-        // On encrypte les charactère one by one
-        for (char currentChar : charArrayMessage){
+        // On encrypte
+        String messageToSend = desSimple.encrypt(message, key);
+        System.out.println("Message encrypté via DES Simple : " + messageToSend);
 
-            // Conversion du charactère vers sa version binaryString (calculé à partir de son code ASCII decimal)
-            String charToBinaryString = Util.charToBinaryString(currentChar);
-            //System.out.println(charToBinaryString);
+        // On décrypte
+        String messageDecrypted = desSimple.decrypt(messageToSend, key);
+        System.out.println("Message decrypté via DES Simple : " + messageDecrypted);
 
-            // Conversion de la chaîne de charactères binaire vers une liste de booleens
-            List<Boolean> messageBoolean = Util.binaryStringToBooleanList(charToBinaryString);
-            //Util.printBooleanListFormat(messageBoolean);
+        // On encrypte
+        messageToSend = des64.encrypt(message, key64);
+        System.out.println("Message encrypté via DES 64 : " + messageToSend);
 
-            // Version encryptée de la liste de booléens
-            List<Boolean> booleanListEncrypted =  des.encrypt(messageBoolean, keyBoolean);
-            //Util.printBooleanListFormat(booleanListEncrypted);
-
-            // Conversion de la liste de booléens encrypté vers sa chaîne de charactères binaire
-            String binaryStringEncrypted = Util.booleanListToBinaryString(booleanListEncrypted);
-
-            // Récupération du charactère ASCII au format encrypté
-            String charToAddOnMessage = Util.binaryStringToChar(binaryStringEncrypted);
-
-            // Ajout du characère encrypté au message à envoyer
-            messageToSend = messageToSend + charToAddOnMessage;
-        }
-        System.out.println("Message encrypté : " + messageToSend);
-
-        char[] charArrayMessageToDecrypt = messageToSend.toCharArray();
-        String messageDecrypted = "";
-        // On decrypte les charactère one by one
-        for (char currentChar : charArrayMessageToDecrypt){
-
-            // Conversion du charactère vers sa version binaryString (calculé à partir de son code ASCII decimal)
-            String charToBinaryString = Util.charToBinaryString(currentChar);
-
-            // Conversion de la chaîne de charactères binaire vers une liste de booleens
-            List<Boolean> messageBoolean = Util.binaryStringToBooleanList(charToBinaryString);
-
-            // Version encryptée de la liste de booléens
-            List<Boolean> booleanListDecrypted =  des.decrypt(messageBoolean, keyBoolean);
-
-            // Conversion de la liste de booléens encrypté vers sa chaîne de charactères binaire
-            String binaryStringDecrypted = Util.booleanListToBinaryString(booleanListDecrypted);
-
-            // Récupération du charactère ASCII au format encrypté
-            String charToAddOnMessage = Util.binaryStringToChar(binaryStringDecrypted);
-
-            // Ajout du characère encrypté au message à envoyer
-            messageDecrypted = messageDecrypted + charToAddOnMessage;
-        }
-        System.out.println("Message decrypté : " + messageDecrypted);
+        // On décrypte
+        messageDecrypted = des64.decrypt(messageToSend, key64);
+        System.out.println("Message decrypté via DES 64 : " + messageDecrypted);
     }
 
-    public static void testRSA(){
+    private static void testRSA(){
         RSA rsa = new RSA();
         String message = "Un super message";
 
         KeyPair keys = rsa.generateKey(2048);
 
-        byte[] crypted = rsa.encrypt(message,keys.getPublic());
+        byte[] crypted = rsa.encrypt(message, keys.getPublic());
 
-        String output = rsa.decrypt(crypted,keys.getPrivate());
+        String output = rsa.decrypt(crypted, keys.getPrivate());
 
-        System.out.println("Inpput message : "+message);
-        System.out.println("Output message : "+output);
+        System.out.println("Inpput message RSA : " + message);
+        System.out.println("Output message RSA : " + output);
 
     }
 }

@@ -17,7 +17,7 @@ public class RSA implements Constantes {
             kpg.initialize(size);
 
             kp = kpg.generateKeyPair();
-        }catch(Exception e){
+        } catch(Exception e){
             e.printStackTrace();
         }
 

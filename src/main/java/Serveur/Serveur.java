@@ -54,10 +54,10 @@ public class Serveur {
                         //tant que le client est connecté
                         while(msg!=null){
 
-                            if(Util.getType(msg).equals(MessageType.KEY_RSA)){
-                                BASE64Decoder decoder = new BASE64Decoder();
-                                System.out.println(decoder.decodeBuffer(Util.getMessage(msg)));
-                            }
+//                            if(Util.getType(msg).equals(MessageType.KEY_RSA)){
+//                                BASE64Decoder decoder = new BASE64Decoder();
+//                                System.out.println(decoder.decodeBuffer(Util.getMessage(msg)));
+//                            }
 
                             System.out.println("Client : "+msg);
                             msg = in.readLine();

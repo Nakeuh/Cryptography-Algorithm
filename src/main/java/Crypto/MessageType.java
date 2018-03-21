@@ -13,20 +13,20 @@ public enum MessageType {
         this.id = id;
     }
 
-    public static MessageType stringToMessageType(String messageType) {
-        switch (messageType){
-            case "rsa":
-                return KEY_RSA;
-            case "des":
-                return KEY_DES;
-            case "msg":
-                return MSG;
-            case "cls":
-                return MSG_CLOSE;
-            default:
-                return MSG;
-        }
-    }
+//    public static MessageType stringToMessageType(String messageType) {
+//        switch (messageType){
+//            case "rsa":
+//                return KEY_RSA;
+//            case "des":
+//                return KEY_DES;
+//            case "msg":
+//                return MSG;
+//            case "cls":
+//                return MSG_CLOSE;
+//            default:
+//                return MSG;
+//        }
+//    }
 
     public String getId() {
         return id;
