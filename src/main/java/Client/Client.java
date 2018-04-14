@@ -94,7 +94,6 @@ public class Client {
                     try {
                         msg = in.readLine();
                         while(msg!=null){
-                            System.out.println("    (Message crypté : "+msg+")");
                             msg = des64.decrypt(msg,keyDES64);
 
 //                            System.out.println("Serveur : "+Util.getMessage(msg));

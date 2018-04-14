@@ -90,7 +90,6 @@ public class Serveur {
                                     e.printStackTrace();
                                 }
                             }else {
-                                System.out.println("    (Message crypté : "+msg+")");
                                 msg = des.decrypt(msg,keyDES64);
 
 //                                System.out.println("Client : " + Util.getMessage(msg));
