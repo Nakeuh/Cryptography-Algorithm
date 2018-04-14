@@ -13,7 +13,7 @@ public class Main {
 
     public static void main(String [] args){
         testDES();
-        testRSA();
+        //testRSA();
     }
 
     private static void testDES(){
@@ -30,7 +30,8 @@ public class Main {
         String key64 = "0011100110000101010000011101011001001110110001011100000001100010";
 
         System.out.println("Message de départ : " + message);
-        System.out.println("Clé : " + key);
+        System.out.println("Clé simple: " + key);
+        System.out.println("Clé DES 64: " + key64);
 
         // On encrypte
         String messageToSend = desSimple.encrypt(message, key);

@@ -1,7 +1,11 @@
 package Crypto;
 
+import java.security.KeyFactory;
+import java.security.PublicKey;
+import java.security.spec.X509EncodedKeySpec;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Base64;
 import java.util.List;
 
 /**
@@ -287,10 +291,10 @@ public class Util {
         return retour;
     }
 
-//    public static MessageType getType(String message) {
-//        String msg = message.split(Constantes.SPLITTER)[0];
-//        return MessageType.stringToMessageType(msg);
-//    }
+    public static MessageType getType(String message) {
+        String msg = message.split(Constantes.SPLITTER)[0];
+        return MessageType.stringToMessageType(msg);
+    }
 
     public static String getMessage(String message) {
         return message.split(Constantes.SPLITTER)[1];
@@ -312,4 +316,5 @@ public class Util {
 
         return retour;
     }
+
 }
