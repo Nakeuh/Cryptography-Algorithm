@@ -1,7 +1,6 @@
 package Crypto;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -27,13 +26,9 @@ public class Util {
 
     public static List<Boolean> concat(List<Boolean> data1, List<Boolean> data2) {
 
-        Boolean[] array = new Boolean[data1.size()*2];
-        List<Boolean> retour = Arrays.asList(array);
-
-        for(int i = 0 ; i < data1.size(); i++) {
-            retour.set(i, data1.get(i));
-            retour.set(i + data1.size(), data2.get(i));
-        }
+        List<Boolean> retour = new ArrayList<>();
+        retour.addAll(data1);
+        retour.addAll(data2);
 
         return retour;
     }
@@ -146,19 +141,6 @@ public class Util {
         return retour;
     }
 
-    public static String booleanToBinaryString(List<Boolean> data){
-        StringBuilder string = new StringBuilder();
-
-        for(int i = 0 ; i < data.size() - 1 ; i++){
-            if(data.get(i)){
-                string.append(1);
-            } else{
-                string.append(0);
-            }
-        }
-        return string.toString();
-    }
-
     public static List<Boolean> or(List<Boolean> data, List<Boolean> key) {
 
         List<Boolean> retour = new ArrayList<Boolean>();
@@ -259,34 +241,13 @@ public class Util {
         return booleanList;
     }
 
-    public static void printBooleanListFormat(List<Boolean> booleanList){
-        System.out.print("[");
-
-        for (int i=0; i < booleanList.size(); i++){
-            if(booleanList.get(i)){
-                if(i == booleanList.size()-1){
-                    System.out.print("1");
-                }else{
-                    System.out.print("1,");
-                }
-            }else{
-                if(i == booleanList.size()-1){
-                    System.out.print("0");
-                }else{
-                    System.out.print("0,");
-                }
-            }
-        }
-        System.out.println("]");
-    }
-
     public static String booleanListToBinaryString(List<Boolean> booleanList){
         String binaryString = "";
 
         for (Boolean bool : booleanList){
             if(bool){
                 binaryString = binaryString + "1";
-            }else{
+            } else {
                 binaryString = binaryString + "0";
             }
         }

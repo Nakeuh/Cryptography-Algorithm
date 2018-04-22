@@ -15,6 +15,8 @@ abstract class DES {
 
     public List<Boolean> etapesEncrypt(List<Boolean> data, List<List<Boolean>> keys, int nombreEtape) {
 
+        // Dans cette fonction, on va faire n étapes
+        // Dans chaque étape, on fait appel à notre fonction fk, puis on switch nos deux listes et on les concatène
         List<List<Boolean>> fkResult = fk(data, keys.get(0));
         List<List<Boolean>> fkResultSwitched = Util.switchList(fkResult);
         List<Boolean> concatenation = Util.concat(fkResultSwitched.get(0), fkResultSwitched.get(1));
@@ -34,6 +36,8 @@ abstract class DES {
 
     public List<Boolean> etapesDecrypt(List<Boolean> data, List<List<Boolean>> keys, int nombreEtape) {
 
+        // Dans cette fonction, on va faire n étapes
+        // Dans chaque étape, on fait appel à notre fonction fk, puis on switch nos deux listes et on les concatène
         List<List<Boolean>> fkResult = fk(data, keys.get(nombreEtape - 1));
         List<List<Boolean>> fkResultSwitched = Util.switchList(fkResult);
         List<Boolean> concatenation = Util.concat(fkResultSwitched.get(0), fkResultSwitched.get(1));
@@ -56,6 +60,8 @@ abstract class DES {
         List<List<Boolean>> retour = new ArrayList<List<Boolean>>();
 
         for(int i = 1 ; i <= nombreEtape ; i++) {
+
+            // On effectue un shift de nos bits de i bits vers la gauche (i augmentant à chaque étape)
             halfs.set(0, Util.shiftBit(halfs.get(0), i, true));
             halfs.set(1, Util.shiftBit(halfs.get(1), i, true));
 

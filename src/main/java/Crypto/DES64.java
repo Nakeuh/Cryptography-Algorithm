@@ -16,6 +16,8 @@ public class DES64 extends DES {
         List<List<Boolean>> keys = keyGeneration(keyBoolean);
 
         int i = 0;
+
+        // On découpe notre message en bloc de 64 bits pour encrypter chacun des blocs avec DES64
         while (i < message.length()) {
 
             // On convertit notre bloc en List<Boolean>
@@ -33,7 +35,7 @@ public class DES64 extends DES {
             // Première permutation sur le bloc avec IP
             List<Boolean> initialPermutResult = permute(currentBooleanList, Constantes64.IP);
 
-            // Déroulement des étapes
+            // Déroulement des étapes (16 étapes pour DES 64)
             List<Boolean> etapeResult = etapesEncrypt(initialPermutResult, keys, 16);
 
             // Permutation finale
@@ -170,10 +172,15 @@ public class DES64 extends DES {
         Boolean fifthValue = data.get(4);
         Boolean lastValue = data.get(5);
 
+        // On récupère le numéro de ligne avec la première et la dernière valeur
         int ligne = Util.booleanToInt(firstValue, lastValue);
+
+        // On récupère le numéro de colonne avec les 4 valeurs du milieu
         int colonne = Util.booleanToInt(secondValue, thirdValue, fourthValue, fifthValue);
 
         int value = S[ligne * 16 + colonne];
+
+        // On aura alors un résultat sur 4 bits
         retour = Util.intToBoolean(value, 4);
 
         return retour;
