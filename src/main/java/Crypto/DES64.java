@@ -113,7 +113,6 @@ public class DES64 extends DES {
     }
 
     public List<List<Boolean>> fk(List<Boolean> data, List<Boolean> key) {
-
         List<List<Boolean>> retour = new ArrayList<List<Boolean>>();
 
         // On splitte (deux listes de taille 32)
