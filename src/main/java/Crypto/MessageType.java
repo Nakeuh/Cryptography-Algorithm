@@ -1,6 +1,5 @@
 package Crypto;
 
-
 public enum MessageType {
     KEY_RSA("rsa"),
     KEY_DES("des"),

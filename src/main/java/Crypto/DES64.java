@@ -46,6 +46,7 @@ public class DES64 extends DES {
             retour += Util.binaryStringToChar(binaryStringEncrypted);
 
             i = i + 8;
+
         }
 
         return retour;
@@ -91,6 +92,7 @@ public class DES64 extends DES {
             retour += Util.binaryStringToChar(binaryStringEncrypted);
 
             i = i + 8;
+
         }
 
         return retour;
@@ -162,12 +164,14 @@ public class DES64 extends DES {
         List<Boolean> retour;
 
         Boolean firstValue = data.get(0);
-        Boolean lastValue = data.get(data.size() - 1);
         Boolean secondValue = data.get(1);
-        Boolean thirdValue = data.get(data.size() - 2);
+        Boolean thirdValue = data.get(2);
+        Boolean fourthValue = data.get(3);
+        Boolean fifthValue = data.get(4);
+        Boolean lastValue = data.get(5);
 
         int ligne = Util.booleanToInt(firstValue, lastValue);
-        int colonne = Util.booleanToInt(secondValue, thirdValue);
+        int colonne = Util.booleanToInt(secondValue, thirdValue, fourthValue, fifthValue);
 
         int value = S[ligne * 16 + colonne];
         retour = Util.intToBoolean(value, 4);

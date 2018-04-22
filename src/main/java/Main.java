@@ -19,7 +19,7 @@ public class Main {
     private static void testDES(){
 
         // Message que l'on souhaite chiffrer
-        String message = "Un super message !";
+        String message = "Un super message ! Youpi";
 
         // Setup DES Simple
         DESSimple desSimple = new DESSimple();

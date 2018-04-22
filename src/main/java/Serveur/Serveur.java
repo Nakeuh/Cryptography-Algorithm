@@ -4,7 +4,6 @@ import Crypto.DES64;
 import Crypto.MessageType;
 import Crypto.RSA;
 import Crypto.Util;
-import sun.misc.BASE64Decoder;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -27,9 +26,9 @@ public class Serveur {
         final BufferedReader in;
         final PrintWriter out;
         final Scanner sc=new Scanner(System.in);
-        RSA rsa = new RSA();
-        DES64 des = new DES64();
-        String keyDES64 = "0011100110000101010000011101011001001110110001011100000001100010";
+        final RSA rsa = new RSA();
+        final DES64 des = new DES64();
+        final String keyDES64 = "0011100110000101010000011101011001001110110001011100000001100010";
 
         try {
             serveurSocket = new ServerSocket(5000);
@@ -46,7 +45,7 @@ public class Serveur {
                 public void run() {
                     while(true){
                         System.out.print("Serveur : ");
-                        msg = des.encrypt(sc.nextLine(),keyDES64);
+                        msg = des.encrypt(sc.nextLine(), keyDES64);
                         out.println(msg);
                         out.flush();
                     }
@@ -86,10 +85,10 @@ public class Serveur {
                                     System.out.println("Envoie de la clé cryptée au client");
                                     System.out.println("La conversation peut désormais débuter. Tous les messages seront cryptées à l'aide d'une clé DES64");
 
-                                }catch(Exception e){
+                                } catch(Exception e){
                                     e.printStackTrace();
                                 }
-                            }else {
+                            } else {
                                 msg = des.decrypt(msg,keyDES64);
 
 //                                System.out.println("Client : " + Util.getMessage(msg));
