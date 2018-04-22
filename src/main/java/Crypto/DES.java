@@ -13,6 +13,13 @@ abstract class DES {
 
     abstract List<List<Boolean>> fk(List<Boolean> data, List<Boolean> key);
 
+    /**************
+     *   Fonction permettant de gérer un ensemble de transformation itératives appelées rondes
+     *   On y passe nos datas, nos clés ainsi que le nombre d'étapes souhaitées
+     *   Pour DES 64, liste de 16 clés et 16 étapes à effectuer
+     *
+     *   Dans chaque étape, on fait appel à notre fonction fk, puis on switch nos deux listes et on les concatène
+     *************/
     public List<Boolean> etapesEncrypt(List<Boolean> data, List<List<Boolean>> keys, int nombreEtape) {
 
         // Dans cette fonction, on va faire n étapes
@@ -55,6 +62,18 @@ abstract class DES {
         return concatenation;
     }
 
+    /**************
+     *   Fonction gérant les différentes étapes de génération de notre liste de clé
+     *   On y passe en paramètre notre clé de départ permuté puis splittée, ainsi que le nombre d'étapes que l'on souhaite
+     *   (16 étapes pour DES64 par exemple), ainsi que la permutation que l'on souhaite utiliser
+     *
+     *   Pour chaque étape, les deux blocs subissent ensuite une rotation à gauche, de telles façons que les bits
+     *   en seconde position prennent la première position, ceux en troisième position la seconde, ...
+     *   Les bits en première position passent en dernière position.
+     *
+     *   Dans le cas du DES64, les 2 blocs de 28 bits sont ensuite regroupés en un bloc de 56 bits.
+     *   Celui-ci passe par une permutation, fournissant en sortie un bloc de 48 bits, représentant une clé d'étape.
+     *************/
     public List<List<Boolean>> etapesKeyGeneration(List<List<Boolean>> halfs, int nombreEtape, int[] permutations) {
 
         List<List<Boolean>> retour = new ArrayList<List<Boolean>>();
@@ -76,6 +95,11 @@ abstract class DES {
         return retour;
     }
 
+    /**************
+     *   Fonction gérant les permutations
+     *   On y passe en paramètre notre liste de bits de départ ainsi que le tableau de permutation
+     *   Nous renvoit la liste permutée
+     *************/
     public List<Boolean> permute(List<Boolean> bits, int[] permutations){
         List<Boolean> retour = new ArrayList<Boolean>();
 

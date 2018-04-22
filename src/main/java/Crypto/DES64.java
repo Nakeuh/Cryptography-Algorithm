@@ -5,7 +5,12 @@ import java.util.List;
 
 public class DES64 extends DES {
 
-    /* Longueur de la clé attendu : 64 bits */
+    /**************
+     *   Fonction permettant d'encrypter notre message à l'aide de notre clé DES 64
+     *   La taille de la clé attendue est de 64 bits
+     *   Le message peut être de n'importe quel taille (notre algorithme découpera le message en x blocs
+     *   de 64 bits afin de les traiter successivement)
+     *************/
     public String encrypt(String message, String key) {
 
         String retour = "";
@@ -54,6 +59,12 @@ public class DES64 extends DES {
         return retour;
     }
 
+    /**************
+     *   Fonction permettant de decrypter notre message à l'aide de notre clé DES 64
+     *   La taille de la clé attendue est de 64 bits
+     *   Le message peut être de n'importe quel taille (notre algorithme découpera le message en x blocs
+     *   de 64 bits afin de les traiter successivement)
+     *************/
     public String decrypt(String crypted, String key) {
 
         String retour = "";
@@ -100,6 +111,11 @@ public class DES64 extends DES {
         return retour;
     }
 
+    /**************
+     *   Fonction permettant de générer notre liste de 16 clés de 48 bits
+     *   La fonction prend en parametre notre clé DES 64 de départ (64 bits)
+     *   Ici, on aura 16 étapes afin de générer les 16 clés
+     *************/
     public List<List<Boolean>> keyGeneration(List<Boolean> key) {
 
         // Initialisation : Permutation
@@ -112,6 +128,9 @@ public class DES64 extends DES {
 
     }
 
+    /**************
+     *   Fonction permettant de gérer un ensemble de transformation que l'on appelle ronde
+     *************/
     public List<List<Boolean>> fk(List<Boolean> data, List<Boolean> key) {
         List<List<Boolean>> retour = new ArrayList<List<Boolean>>();
 
@@ -160,6 +179,14 @@ public class DES64 extends DES {
         return retour;
     }
 
+    /**************
+     *   Fonction de sélection (appelée parfois boîtes de substitution ou fonctions de compression)
+     *   Les premiers et derniers bits de chaque data détermine (en binaire) la ligne de la fonction de sélection,
+     *   Les autres bits (respectivement 2, 3, 4 et 5) déterminent la colonne.
+     *   La sélection de la ligne se faisant sur deux bits, il y a 4 possibilités (0,1,2,3).
+     *   La sélection de la colonne se faisant sur 4 bits, il y a 16 possibilités (0 à 15).
+     *   Grâce à cette information, la fonction de sélection "sélectionne" une valeur codée sur 4 bits.
+     *************/
     private List<Boolean> sbox(List<Boolean> data, int[] S) {
 
         List<Boolean> retour;
