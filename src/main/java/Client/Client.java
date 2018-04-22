@@ -98,7 +98,7 @@ public class Client {
 
 //                            System.out.println("Serveur : "+Util.getMessage(msg));
                             System.out.println("Serveur : "+msg);
-                            System.out.print("Client : ");
+                            //System.out.print("Client : ");
 
                             msg = in.readLine();
                         }

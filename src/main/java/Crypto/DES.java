@@ -64,7 +64,6 @@ abstract class DES {
 
             // On permute
             List<Boolean> keyPermute = permute(concatenation, permutations);
-
             retour.add(keyPermute);
         }
 
